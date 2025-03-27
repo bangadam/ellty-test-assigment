@@ -5,6 +5,22 @@
   height: 24px;
   cursor: pointer;
   flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  line-height: 130%;
+  color: #1f2128;
+  cursor: pointer;
 }
 
 .checkbox__input {
@@ -25,6 +41,7 @@
   border: 1px solid #cdcdcd;
   border-radius: 6px;
   transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
 }
 
 .checkbox__input:checked ~ .checkbox__checkmark {
@@ -41,10 +58,10 @@
   content: "";
   position: absolute;
   display: block;
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
+  left: 8px;
+  top: 4px;
+  width: 6px;
+  height: 12px;
   border: solid #333;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
@@ -53,16 +70,17 @@
 /* Blue checkbox */
 .checkbox--blue .checkbox__input:checked ~ .checkbox__checkmark {
   background-color: #4285f4;
+  border-color: #4285f4;
 }
 
 .checkbox--blue .checkbox__input:checked ~ .checkbox__checkmark:after {
   content: "";
   position: absolute;
   display: block;
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
+  left: 8px;
+  top: 4px;
+  width: 6px;
+  height: 12px;
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
@@ -73,16 +91,54 @@
   border-color: #aaaaaa;
 }
 
+.checkbox--default:hover .checkbox__input:checked ~ .checkbox__checkmark {
+  border-color: #aaaaaa;
+}
+
 .checkbox--blue:hover .checkbox__input:checked ~ .checkbox__checkmark {
   background-color: #5294ff;
+  border-color: #5294ff;
+}
+
+/* Focus states for accessibility */
+.checkbox__input:focus-visible ~ .checkbox__checkmark {
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.4);
 }
 
 /* Disabled state */
 .checkbox__input:disabled ~ .checkbox__checkmark {
   background-color: #f5f5f5;
+  border-color: #e0e0e0;
   cursor: not-allowed;
 }
 
 .checkbox__input:disabled:checked ~ .checkbox__checkmark:after {
   border-color: #999999;
+}
+
+.checkbox__input:disabled ~ .checkbox__checkmark {
+  cursor: not-allowed;
+}
+
+/* Animation */
+.checkbox__checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox__input:checked ~ .checkbox__checkmark:after {
+  display: block;
+  animation: checkmark-appear 0.15s ease-out;
+}
+
+@keyframes checkmark-appear {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+  }
 }

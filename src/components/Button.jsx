@@ -6,6 +6,8 @@ import "./Button.css";
  *
  * @param {Object} props - Component props
  * @param {string} [props.variant='primary'] - Button variant (primary, secondary, etc.)
+ * @param {string} [props.size='medium'] - Button size (small, medium, large)
+ * @param {string} [props.width='default'] - Button width (default, auto, full)
  * @param {string} props.children - Button label/content
  * @param {function} [props.onClick] - Click handler function
  * @param {string} [props.className] - Additional CSS classes
@@ -14,13 +16,17 @@ import "./Button.css";
  */
 const Button = ({
   variant = "primary",
+  size = "medium",
+  width = "default",
   children,
   onClick,
   className = "",
   disabled = false,
   ...rest
 }) => {
-  const buttonClass = `button button--${variant} ${className}`;
+  const buttonClass = `button button--${variant} ${
+    size !== "medium" ? `button--${size}` : ""
+  } ${width !== "default" ? `button--${width}` : ""} ${className}`;
 
   return (
     <button
